@@ -11,5 +11,5 @@ Base.query = db_session.query_property()
 
 def init_db():
   #We only need init_db to create the database and tables
-  import models
+  import personne
   Base.metadata.create_all(bind=engine)
