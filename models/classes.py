@@ -3,11 +3,11 @@ from common import *
 class Personne(Base):
   __tablename__ = 'personne'
   nCin = Column(Integer, primary_key = True)
-  nom = Column(String(90), unique = True)
-  prenom = Column(String(90), unique = True)
-  adresse = Column(String(90), unique = True)
+  nom = Column(String(90))
+  prenom = Column(String(90))
+  adresse = Column(String(90))
   email = Column(String(90), unique = True)
-  sexe = Column(String(90), unique = True)
+  sexe = Column(String(90))
   date_naissance = Column(Date)
   type = Column(String(20))
 

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <!-- Facebook meta tag -->
+        <meta property="og:title" content="Smart Classroom" />
+        <meta property="og:url" content="http://esprit.tn" />
+        <meta property="og:site_name" content="Smart Classroom Control Panel" />
+        <meta property="og:description" content="A Dashboard and a Controle Panel for the Smart Classroom" />
+        
+        <title>Smart Classroom CP</title>
+        <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
+        
+        <link rel="stylesheet" media="screen,projection,tv" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+        <link rel="stylesheet" media="screen,projection,tv" href="{{ url_for('static', filename='css/bootstrap-responsive.min.css')}}">
+
+        <link rel="stylesheet" media="screen,projection,tv" href="{{ url_for('static', filename='css/responsive-min.css')}}">
+        <link rel="stylesheet" media="screen,projection,tv" href="{{ url_for('static', filename='css/products-min.css')}}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/Favicon.ico')}}">
+
+        
+
+        <script id="undefined" src="{{ url_for('static', filename='js/inpage_linkid.js')}}" async="" type="text/javascript"></script>
+        <script src="{{ url_for('static', filename='js/ga.js')}}" async="" type="text/javascript"></script>
+        <script src="{{ url_for('static', filename='js/site-min.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/smoothscroll.js')}}"></script>
+          
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
+        <!-- jQuery -->
+        <script type="text/javascript" src="{{ url_for('static', filename='js/scrolltotop.js')}}"></script>
+        <!-- The plugin file -->
+        <script type="text/javascript">
+            jQuery(document).ready(function($){
+                //Back to top plugin instanciation
+                $('body').backtotop();
+            });
+        </script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+
+    </head>
+    <body id="products-page" class="html-ltr sand lang-en-US">
+        <div id="strings"></div>
+        <div id="outer-wrapper">
+            <div id="wrapper">
+                <header id="masthead">
+                    <nav id="nav-main" role="navigation">
+                        <span class="toggle" role="button" aria-controls="nav-main-menu" tabindex="0">Menu</span>
+                        <ul id="nav-main-menu">
+                            <li class="first"><a href="{{ url_for('index') }}">Home</a></li>
+                        </ul>
+                    </nav>
+                    <!-- <h2> -->
+                        <a href="http://esprit.tn/">
+                            <img src="{{ url_for('static', filename='img/logo-esprit.png')}}" alt="esprit" style="margin-top: 15px;">
+                        </a>
+                    <!-- </h2> -->
+                </header>
+                <hgroup id="main-feature" style="margin-top: -35px;">
+                    <h1 class="medium">Smart Classroom</h1>
+                </hgroup>                 
+                <nav id="products-nav" class="menu-bar billboard">
+                <!--    <ul>
+                        <li><a href="#products">Mozilla</a></li>
+                        <li><a href="#firefoxos">Firefox OS</a></li>
+                        <li><a href="#tools">Autres</a></li>
+                        <li><a href="#platforms">Comming Soon</a></li>
+                    </ul> -->
+                    
+                </nav>
+{% block body %} {% endblock %}
+            </div>
+            <!-- close #wrapper -->
+            <footer id="colophon" class="">
+                <div class="row">
+                    <div class="footer-logo">
+                        <a href="http://esprit.tn/"><img src="{{ url_for('static', filename='img/logo-esprit.png')}}" alt="esprit"></a>
+                    </div>
+                    <div class="footer-license">
+                        <p>
+                        <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+                        </p>
+                        <p>
+                            <a href="https://github.com/cbeing/">Contribuer à cette page</a>
+                        </p>
+                    </div>
+                    <ul class="footer-nav">
+                        <li><a href="https://github.com/cbeing/">Signaler un bug</a></li>
+                    </ul>
+                    </div>
+            </footer>
+        </div>
+        <script src="{{ url_for('static', filename='js/mozorg-resp-min.js')}}"></script>
+</body>
+
