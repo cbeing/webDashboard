@@ -14,6 +14,13 @@ def listClass(class_id = None):
   classes = getClasseList()
   return render_template('classes.html', classes = classes)
 
+@app.route('/c/<class_id>')
+def listOfStudentsPerClass(class_id):
+  classe = Classe.query.filter(Classe.id == class_id)
+  if(classe.count() == 0):
+    return render_template('students.html', classe = None)
+
+  return render_template('students.html', classe = classe[0])
 
 @app.route('/presence')
 def liste_presence():

@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block body %}
+  <section class="billboard products">
+    <h1 class="scr-title">Smart Classroom dashboard</h1>
+      {% if classe != None %}
+      <h2> Student's list of the {{ classe.id }} </h2>
+      <table id="slide-list" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for e in (classe|getStudentsList) %}
+            <tr>
+              <td>{{ e.numInscription }}</td>
+              <td>{{ e.nom }}</td>
+              <td>{{ e.prenom }}</td>
+              <td>{{ e.email }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+        <h2>Sorry, this class doesn't exist </h2>
+      {% endif %}
+  </section>
+{% endblock %}
