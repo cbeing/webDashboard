@@ -14,10 +14,10 @@
           {% for m in materials %}
             <tr>
               <td>{{ m.code }}</td>
-              <td>{{ m.label }}</td>
+              <td>{{ m.label.decode('utf-8', 'replace') }}</td>
               <td style="width:80px;">
                 <button data-toggle-dialog="#" data-toggle="modal" data-target="#updateMaterial" title="Update Material" class="btn btn-small btn-warning" type="button"><i class="icon-white icon-edit"></i></button>
-                <button data-toggle-dialog="#" data-toggle="modal" data-target="#deleteslide" title="Update Slide" class="btn btn-small btn-danger" type="button"><i class="icon-white icon-trash"></i></button>
+                <button data-toggle-dialog="#" data-toggle="modal" data-target="#deleteMaterial" title="Delete Material" class="btn btn-small btn-danger" type="button"><i class="icon-white icon-trash"></i></button>
               </td>
             </tr>
           {% endfor %}
@@ -89,6 +89,32 @@
     </form>
   </div>
   <!-- end of add material form -->
+  <!-- delete material form-->
+  <div class="modal hide fade" id="deleteMaterial" role="dialog" aria-labelledby="labeldeletematerial">
+    <form method="POST" action="{{ url_for('deleteMaterial') }}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="labelupdatematerial">Delete this material</h4>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want delete this material ?<p>
+              <strong>
+                <span class="title-container"</span>
+              </strong>
+            </p>
+            <input type="hidden" name="code"/>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" value="submit" class="btn btn-primary"/>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- end of delete material form -->
   <!-- end of modal forms-->
 
 <script type="text/javascript">
@@ -97,6 +123,7 @@
       var columns = e.closest('tr').find('td');
       var code = $(columns[0]).text();
       var label = $(columns[1]).text();
+      $('.title-container').html(label);
       $('input[name=code]').val(code);
       $('input[name=label]').val(label);
 

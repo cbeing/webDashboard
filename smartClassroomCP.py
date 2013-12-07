@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 from models.database import db_session
 from models.classes import *
-from flask import Flask, url_for, render_template, session, escape, request
+from flask import Flask, url_for, render_template, session, escape, request, redirect
 
 app = Flask(__name__)
 
@@ -53,6 +54,15 @@ def updateMaterial():
   materials = getMaterialsList()
 
   return render_template('materials.html', materials = materials)
+
+@app.route('/m/delete', methods=['GET', 'POST'])
+def deleteMaterial():
+  material_code = request.form['code']
+  m = Matiere.query.get(material_code)
+  db_session.delete(m)
+  db_session.commit()
+
+  return redirect(url_for('listMaterials'))
 
 def getClasseList():
   return Classe.query.all()
