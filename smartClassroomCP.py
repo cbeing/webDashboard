@@ -42,6 +42,18 @@ def addMaterial():
   materials = getMaterialsList()
   return render_template('materials.html', materials = materials)
 
+@app.route('/m/update', methods=['GET', 'POST'])
+def updateMaterial():
+  material_id = request.form['code']
+  m = Matiere.query.get(material_id)
+  m.label = request.form['label']
+  db_session.add(m)
+  db_session.commit()
+
+  materials = getMaterialsList()
+
+  return render_template('materials.html', materials = materials)
+
 def getClasseList():
   return Classe.query.all()
 
