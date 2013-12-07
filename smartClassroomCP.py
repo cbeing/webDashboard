@@ -9,6 +9,12 @@ app = Flask(__name__)
 def index():
   return render_template('index.html') 
 
+@app.route('/c')
+def listClass(class_id = None):
+  classes = getClasseList()
+  return render_template('classes.html', classes = classes)
+
+
 @app.route('/presence')
 def liste_presence():
   classes = getClasseList()
