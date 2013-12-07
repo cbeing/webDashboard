@@ -43,21 +43,12 @@ class Enseignant(Personne):
   __tablename__ = 'enseignant'
   id = Column(Integer, ForeignKey('personne.nCin'))
   matricule = Column(String(10), primary_key = True)
-  grade = Column(Integer, ForeignKey('grade.id'), nullable = False)
 
   __mapper_args__ = {'polymorphic_identity':'enseignant'}
 
   def __init__(self, grade):
     self.grade = grade
     
-
-class Grade(Base):
-  __tablename__ = 'grade'
-  id = Column(Integer, primary_key = True)
-  nom = Column(String(20), nullable = False, unique = True)
-
-  def __init__(self, nom):
-    self.nom = nom
 
 class Classe(Base):
   __tablename__ = 'classe'
@@ -82,6 +73,9 @@ class Seance(Base):
   id = Column(Integer, primary_key = True)
   matiere = Column(String(20), ForeignKey('matiere.code'))
   classe = Column(String(10), ForeignKey('classe.id'))
+  presenceList = relationship('Presence', backref='seance', lazy='dynamic')
+#Column(Integer(10), ForeignKey('presence.id'), nullable = False)
+  enseignant = Column(Integer, ForeignKey('enseignant.id'), nullable = False)
 
   def __init__(self, matiere, classe):
     self.matiere = matiere
@@ -90,10 +84,9 @@ class Seance(Base):
 class Presence(Base):
   __tablename__ = 'presence'
   id = Column(Integer, primary_key = True)
-  seance = Column(Integer, ForeignKey('seance.id'), nullable = False)
   etudiant = Column(Integer, ForeignKey('etudiant.id'), nullable = False)
-  enseignant = Column(Integer, ForeignKey('enseignant.id'), nullable = False)
   heure_entree = Column(Date)
+  seance_id = Column(Integer, ForeignKey('seance.id'))
 
   def __init__(self, seance, etudiant, enseignant, heure_entree):
     self.seance = seance
