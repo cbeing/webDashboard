@@ -1,8 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+import json
 
-engine = create_engine('sqlite:///db/smartClassroom.db', convert_unicode=True)
+fConfig = open('config.json', 'r')
+config = json.load(fConfig)
+fConfig.close()
+
+engine = create_engine('mysql://'+config['user']+':'+config['password']+'@'+config['host']+'/'+config['database_name']+'?unix_socket=/var/run/mysqld/mysqld.sock', convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False, 
       autoflush=False,bind=engine))
 
