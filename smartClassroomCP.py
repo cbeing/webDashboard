@@ -10,7 +10,7 @@ def index():
   return render_template('index.html') 
 
 @app.route('/c')
-def listClass(class_id = None):
+def listClass():
   classes = getClasseList()
   return render_template('classes.html', classes = classes)
 
@@ -27,6 +27,20 @@ def liste_presence():
   classes = getClasseList()
   return render_template('absence.html', classes = classes)
 
+@app.route('/m')
+def listMaterials():
+  materials = getMaterialsList()
+  return render_template('materials.html', materials = materials)
+
+@app.route('/m/add', methods=['GET', 'POST'])
+def addMaterial():
+  if 'label' in request.form and 'code' in request.form:
+    m = Matiere(request.form['code'], request.form['label'])
+    db_session.add(m)
+    db_session.commit()
+
+  materials = getMaterialsList()
+  return render_template('materials.html', materials = materials)
 
 def getClasseList():
   return Classe.query.all()
@@ -36,6 +50,9 @@ def getStudentsList(classe = None):
   if classe == None :
     return Etudiant.query.all()
   return Etudiant.query.filter(Etudiant.classe == classe.id)
+
+def getMaterialsList():
+  return Matiere.query.all()
 
 if __name__ == '__main__':
   app.run(debug = True, host= '0.0.0.0')

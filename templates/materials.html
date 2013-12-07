@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block body %}
+  <section class="billboard products">
+    <h1>Smart Classroom dashboard</h1>
+      <h2> Materials List </h2>
+      <table id="slide-list" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Label</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in materials %}
+            <tr>
+              <td>{{ m.code }}</td>
+              <td>{{ m.label }}</td>
+              <td style="width:80px;">
+                <button data-toggle-dialog="#" data-toggle="modal" data-target="#updateslide" title="Update Slide" class="btn btn-small btn-warning" type="button"><i class="icon-white icon-edit"></i></button>
+                <button data-toggle-dialog="#" data-toggle="modal" data-target="#deleteslide" title="Update Slide" class="btn btn-small btn-danger" type="button"><i class="icon-white icon-trash"></i></button>
+              </td>
+            </tr>
+          {% endfor %}
+            <tr>
+              <td colspan="2"><button data-toggle="modal" data-target='#addMaterial' title='Add Material' class="btn btn-small btn-info" type="button"><i class="icon-plus-sign"></i>Add Material</button>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+  </section>
+  <!-- all modal forms here : -->
+  <div class="modal hide fade" id="addMaterial" role="dialog" aria-labelledby="labeladdmaterial">
+    <form method="POST" action="{{ url_for('addMaterial') }}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="labeladdmaterial">Add new material</h4>
+          </div>
+          <div class="modal-body">
+            <table class="span5">
+              <tr>
+                <td><label>Code</label></td>
+                <td><input type="text" name="code" required/></td>
+              </tr>
+              <tr>
+                <td><label>Label</label></td>
+                <td><input type="text" name="label" required/></td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" value="submit" class="btn btn-primary"/>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- end of modal forms-->
+{% endblock %}
