@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block body %}
+  <section class="billboard products">
+    <h1 class="scr-title">Smart Classroom dashboard</h1>
+      <h2> Information about the session {{ (session.matiere|getMatiere).label }} du {{ session.date }} </h2>
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span2">
+            <ul>
+              <li><strong>ID: </strong> {{ session.id }}</li>
+              <li><strong>Classe: </strong> {{ session.classe }}</li>
+              <li><strong>Matiere: </strong> {{ (session.matiere|getMatiere).label }}</li>
+              <li><strong>Date: </strong> {{ session.date }}</li>
+              <li><strong>Enseignant: </strong> {{ session.enseignant }}</li>
+            </ul>
+          </div>
+          <div class="span10">
+            <table id="slide-list" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nom</th>
+                  <th>Prénom</th>
+                  <th>Heure d'entrée</th>
+                  <th>Présence</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for p in session.presenceList %}
+                   
+                  <tr>
+                    <td>{{ (p.etudiant|getStudent).numInscription }}</td>
+                    <td>{{ (p.etudiant|getStudent).nom }}</td>
+                    <td>{{ (p.etudiant|getStudent).prenom }}</td>
+                    <td>{{ p.heure_entree }}</td>
+                    <td>
+                      <input type="checkbox" name="pr{{(p.etudiant|getStudent).numInscription}}" {% if p.etat %} checked {% endif %}/>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+           </div>
+        </div>
+      </div>
+  </section>
+{% endblock %}

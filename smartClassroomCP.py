@@ -81,6 +81,10 @@ def deleteMaterial():
 def getMatiere(mat_code):
   return Matiere.query.get(mat_code)
 
+@app.template_filter('getStudent')
+def getStudent(student_id):
+  return Etudiant.query.get(student_id)
+
 def getClasseList():
   return Classe.query.all()
 
@@ -114,6 +118,12 @@ def addSession():
 
   return redirect(url_for('listSessions'))
 
+
+@app.route('/s/<session_id>')
+def viewSession(session_id):
+  session = Seance.query.get(session_id) 
+
+  return render_template('sessionOverview.html', session = session)
 
 @app.template_filter('getSessionsList')
 def getSessionsList(classe = None):
