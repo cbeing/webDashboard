@@ -20,14 +20,11 @@
         <tbody>
           {% for s in (c|getSessionsList) %}
             <tr>
-              <td>{{ e.id}}</td>
-              <td>{{ e.matiere}}</td>
-              <td>{{ e.classe}}</td>
-              <td>{{ e.date }}</td>
-              <td style="width:80px;">
-                <button data-toggle-dialog="#" data-toggle="modal" data-target="#updateslide" title="Update Slide" class="btn btn-small btn-warning" type="button"><i class="icon-white icon-edit"></i></button>
-                <button data-toggle-dialog="#" data-toggle="modal" data-target="#deleteslide" title="Update Slide" class="btn btn-small btn-danger" type="button"><i class="icon-white icon-trash"></i></button>
-              </td>
+              <td>{{ s.id}}</td>
+              <td>{{ s.matiere}}</td>
+              <td>{{ s.classe}}</td>
+              <td>{{ s.enseignant }} </td>
+              <td>{{ s.date }}</td>
             </tr>
           {% endfor %}
           <tr>
@@ -67,7 +64,13 @@
               </tr>
               <tr>
                 <td><label>Enseignant</label></td>
-                <td></td>
+                <td>
+                  <select name="enseignant" required/>
+                    {% for ens in enseignants %}
+                      <option value="{{ ens.id }}">{{ ens.nom }}</option>
+                    {% endfor %}
+                  </select>
+                </td>
               </tr>
               <tr>
                 <td><label>Date</label></td>

@@ -46,8 +46,8 @@ class Enseignant(Personne):
 
   __mapper_args__ = {'polymorphic_identity':'enseignant'}
 
-  def __init__(self, grade):
-    self.grade = grade
+  def __init__(self, matricule):
+    self.matricule = matricule
     
 
 class Classe(Base):

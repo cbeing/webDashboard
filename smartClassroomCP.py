@@ -67,11 +67,17 @@ def deleteMaterial():
 def getClasseList():
   return Classe.query.all()
 
+def getTeachersList():
+  return Enseignant.query.all()
+
+
 @app.route('/s')
 def  listSessions():
   classes = getClasseList()
   materials = getMaterialsList()
-  return render_template('sessions.html', classes = classes, materials = materials)
+  enseignants = getTeachersList()
+
+  return render_template('sessions.html', classes = classes, materials = materials, enseignants = enseignants)
 
 @app.route('/s/add', methods=['GET', 'POST'])
 def addSession():
@@ -84,7 +90,7 @@ def addSession():
   date = datetime.date(date.tm_year, date.tm_mon, date.tm_mday)
   s = Seance(material_id, classe_id)
   s.date = date
-  s.enseignant =  '1'
+  s.enseignant =  request.form['enseignant']
   
   db_session.add(s)
   db_session.commit()
