@@ -74,7 +74,7 @@ class Seance(Base):
   matiere = Column(String(20), ForeignKey('matiere.code'))
   classe = Column(String(10), ForeignKey('classe.id'))
   presenceList = relationship('Presence', backref='seance', lazy='dynamic')
-#Column(Integer(10), ForeignKey('presence.id'), nullable = False)
+  date = Column(Date)
   enseignant = Column(Integer, ForeignKey('enseignant.id'), nullable = False)
 
   def __init__(self, matiere, classe):

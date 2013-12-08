@@ -67,6 +67,15 @@ def deleteMaterial():
 def getClasseList():
   return Classe.query.all()
 
+@app.route('/s')
+def  listSessions():
+  classes = getClasseList()
+  return render_template('sessions.html', classes = classes)
+
+@app.template_filter('getSessionsList')
+def getSessionsList(classe):
+  return Seance.query.filter(Seance.classe == classe.id)
+
 @app.template_filter('getStudentsList')
 def getStudentsList(classe = None):
   if classe == None :
