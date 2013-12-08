@@ -2,6 +2,9 @@
 {% block body %}
   <section class="billboard products">
     <h1>Smart Classroom dashboard</h1>
+    <div style="text-align:right;">
+      <button data-toggle-dialog="#" data-toggle="modal" data-target="#addsession" title="Add Session" class="btn btn-small btn-info" type="button"><i class="icon-white icon-plus-sign"></i> Add Session </button>
+    </div>
     {% for c in classes %}
       <h2> {{ c.id }} </h2>
       <table id="slide-list" class="table table-bordered table-hover">
@@ -27,8 +30,63 @@
               </td>
             </tr>
           {% endfor %}
+          <tr>
+          </tr>
         </tbody>
       </table>
     {% endfor %}
   </section>
+  <!-- add session form-->
+  <div class="modal hide fade" id="addsession" role="dialog" aria-labelledby="labeladdsession">
+    <form method="POST" action="{{ url_for('addSession') }}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="labelupdatematerial">Add new Session</h4>
+          </div>
+          <div class="modal-body">
+            <table class="span5">
+              <tr>
+                <td><label>Matiere</label></td>
+                <td><select name="matiere" required/>
+                    {% for m in materials %}
+                      <option value="{{ m.code }}"> {{ m.label }}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+              </tr>
+              <tr>
+                <td><label>Classe</label></td>
+                <td><select name="classe" required/>
+                  {% for c in classes %}
+                    <option value="{{ c.id }}">{{ c.id }}</option>
+                  {% endfor %}
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td><label>Enseignant</label></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><label>Date</label></td>
+                <td>
+                    <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                        <input class="span2" size="16" type="text" value="12-02-2012" name="date">
+                        <span class="add-on"><i class="icon-th"></i></span>
+                    </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" value="submit" class="btn btn-primary"/>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- end of add material form -->
 {% endblock %}

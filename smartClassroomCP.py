@@ -70,7 +70,27 @@ def getClasseList():
 @app.route('/s')
 def  listSessions():
   classes = getClasseList()
-  return render_template('sessions.html', classes = classes)
+  materials = getMaterialsList()
+  return render_template('sessions.html', classes = classes, materials = materials)
+
+@app.route('/s/add', methods=['GET', 'POST'])
+def addSession():
+
+  import time, datetime
+
+  classe_id = request.form['classe']
+  material_id = request.form['matiere']
+  date = time.strptime(request.form['date'], "%d-%m-%Y")
+  date = datetime.date(date.tm_year, date.tm_mon, date.tm_mday)
+  s = Seance(material_id, classe_id)
+  s.date = date
+  s.enseignant =  '1'
+  
+  db_session.add(s)
+  db_session.commit()
+
+  return redirect(url_for('listSessions'))
+
 
 @app.template_filter('getSessionsList')
 def getSessionsList(classe):
