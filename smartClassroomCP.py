@@ -23,10 +23,23 @@ def listOfStudentsPerClass(class_id):
 
   return render_template('students.html', classe = classe[0])
 
-@app.route('/presence')
+@app.route('/p')
 def liste_presence():
   classes = getClasseList()
-  return render_template('absence.html', classes = classes)
+  sessions = getSessionsList()
+  return render_template('absence.html', classes = classes, sessions = sessions)
+
+@app.route('/p/add', methods=['GET', 'POST'])
+def generatePresenceList():
+  seance = Seance.query.get(request.form['session'])
+  students = Etudiant.query.filter(seance.classe == Etudiant.classe)
+  for s in students:
+    p = Presence(seance, s.id)
+    db_session.add(p)
+    db_session.commit()
+
+  return redirect(url_for('liste_presence'))
+
 
 @app.route('/m')
 def listMaterials():
@@ -64,6 +77,10 @@ def deleteMaterial():
 
   return redirect(url_for('listMaterials'))
 
+@app.template_filter('getMatiere')
+def getMatiere(mat_code):
+  return Matiere.query.get(mat_code)
+
 def getClasseList():
   return Classe.query.all()
 
@@ -99,7 +116,10 @@ def addSession():
 
 
 @app.template_filter('getSessionsList')
-def getSessionsList(classe):
+def getSessionsList(classe = None):
+  if(classe == None):
+    return Seance.query.all()
+
   return Seance.query.filter(Seance.classe == classe.id)
 
 @app.template_filter('getStudentsList')

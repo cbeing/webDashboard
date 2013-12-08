@@ -88,10 +88,9 @@ class Presence(Base):
   heure_entree = Column(Date)
   seance_id = Column(Integer, ForeignKey('seance.id'))
 
-  def __init__(self, seance, etudiant, enseignant, heure_entree):
+  def __init__(self, seance, etudiant, heure_entree = None):
     self.seance = seance
     self.etudiant = etudiant
-    self.enseignant = enseignant
     self.heure_entree = heure_entree
 
 
