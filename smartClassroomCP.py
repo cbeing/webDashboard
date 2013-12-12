@@ -23,6 +23,12 @@ def listOfStudentsPerClass(class_id):
 
   return render_template('students.html', classe = classe[0])
 
+@app.route('/st/<id_num>')
+def studentProfile(id_num):
+  student = Etudiant.query.filter(Etudiant.numInscription == id_num)[0]
+  presenceList = Presence.query.filter(Presence.etudiant == student.id)
+  return render_template('studentProfile.html', student = student, presence = presenceList)
+
 @app.route('/p')
 def liste_presence():
   classes = getClasseList()
@@ -84,6 +90,10 @@ def getMatiere(mat_code):
 @app.template_filter('getStudent')
 def getStudent(student_id):
   return Etudiant.query.get(student_id)
+
+@app.template_filter('getSession')
+def getSession(session_id):
+  return Seance.query.get(session_id)
 
 def getClasseList():
   return Classe.query.all()
