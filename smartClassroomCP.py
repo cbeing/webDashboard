@@ -46,6 +46,30 @@ def generatePresenceList():
 
   return redirect(url_for('liste_presence'))
 
+@app.route('/p/update', methods=['GET', 'POST'])
+def updatePresence():
+  for s in request.form:
+
+    id = s[2:]
+    if(not s.startswith('pr')):
+      continue
+    state = None
+    print s
+
+    if(request.form[s] == 'a'):
+      state = False
+    elif(request.form[s] == 'p'):
+      state = True
+
+    print state
+
+    presence = Presence.query.filter(Presence.etudiant == id)[0]
+    presence.etat = state
+    db_session.add(presence)
+    db_session.commit()
+
+  return redirect(request.form['url'])
+    
 
 @app.route('/m')
 def listMaterials():

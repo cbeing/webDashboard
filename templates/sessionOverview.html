@@ -26,6 +26,7 @@
                 </tr>
               </thead>
               <tbody>
+                <form method="POST" action="{{ url_for('updatePresence') }}">
                 {% for p in session.presenceList %}
                    
                   <tr>
@@ -34,10 +35,18 @@
                     <td>{{ (p.etudiant|getStudent).prenom }}</td>
                     <td>{{ p.heure_entree }}</td>
                     <td>
-                      <input type="checkbox" name="pr{{(p.etudiant|getStudent).numInscription}}" {% if p.etat %} checked {% endif %}/>
+                      <select name="pr{{(p.etudiant|getStudent).id }}" required>
+                        <option value="a">Absent</option>
+                        <option value="p" {% if p.etat %} selected {% endif %}>Present</option>
+                      </select>
                     </td>
                   </tr>
                 {% endfor %}
+                  <tr>
+                    <td colspan="5" style="text-align:right;"><input type="submit" value="Update" class="btn btn-primary"/></td>
+                  </tr>
+                  <input type="text" name="url" value="{{ url_for('viewSession', session_id = session.id)}}" hidden>
+                </form>
               </tbody>
             </table>
            </div>
