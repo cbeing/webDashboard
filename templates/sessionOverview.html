@@ -2,7 +2,7 @@
 {% block body %}
   <section class="billboard products">
     <h1 class="scr-title">Smart Classroom dashboard</h1>
-      <h2> Information about the session {{ (session.matiere|getMatiere).label }} du {{ session.date }} </h2>
+      <h2>{{ (session.matiere|getMatiere).label }} session of {{ session.date }} </h2>
       <div class="container-fluid">
         <div class="row-fluid">
           <div class="span2">
@@ -29,7 +29,7 @@
                 {% for p in session.presenceList %}
                    
                   <tr>
-                    <td>{{ (p.etudiant|getStudent).numInscription }}</td>
+                    <td><a href="{{ url_for('studentProfile', id_num=(p.etudiant|getStudent).numInscription )}}">{{ (p.etudiant|getStudent).numInscription }}</a></td>
                     <td>{{ (p.etudiant|getStudent).nom }}</td>
                     <td>{{ (p.etudiant|getStudent).prenom }}</td>
                     <td>{{ p.heure_entree }}</td>

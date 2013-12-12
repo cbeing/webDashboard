@@ -16,7 +16,7 @@
         <tbody>
           {% for e in (classe|getStudentsList) %}
             <tr>
-              <td>{{ e.numInscription }}</td>
+              <td><a href="{{ e.numInscription }}">{{ e.numInscription }}</a></td>
               <td>{{ e.nom }}</td>
               <td>{{ e.prenom }}</td>
               <td>{{ e.email }}</td>
