@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block body %}
+  <section class="billboard products">
+    <h1>Smart Classroom dashboard</h1>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/main.js')}}"></script>
+    <script type="text/javascript">
+     
+      window.addEventListener('load', function(e) {
+      console.log("Loaded ! ");
+      var input = document.getElementById('fbrowse');
+      input.onchange = readFile;
+      });
+    </script>
+  <div>
+    <label for="ip">IP</label><input type="text" id="ip"/>
+    <button onclick="connect()">Connect</button>
+  </div>
+    <label for="fbrowse"> The file to read </label><input type="file" id="fbrowse"/>
+
+  <button onclick="sendFile();">Send !</button>
+  <div id="slideContainer">
+  </div>
+  <button onclick="openSlide();">Open !</button>
+  <button onclick="closeSlide();">Close !</button>
+
+  <button onclick="nextSlide();">Next ! </button>
+  <button onclick="backSlide();">Back ! </button>
+  <button onclick="captureNote();">Capture ! </button>
+  <button onclick="saveNotes();">Save ! </button>
+
+  </body>
+
+
+
+  </section>
+
+{% endblock %}

@@ -10,6 +10,10 @@ app = Flask(__name__)
 def index():
   return render_template('index.html') 
 
+@app.route('/classroom')
+def classRoom():
+  return render_template('classroom.html')
+
 @app.route('/c')
 def listClass():
   classes = getClasseList()
