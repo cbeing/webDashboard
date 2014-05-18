@@ -81,7 +81,7 @@ class Presence(Base):
   __tablename__ = 'presence'
   id = Column(Integer, primary_key = True)
   etudiant = Column('etudiant_num_insc', Integer, ForeignKey('etudiant.num_insc'), nullable = False)
-  heure_entree = Column('h_entree', Time)
+  heure_entree = Column('h_entree', String)
   seance_id = Column(Integer, ForeignKey('seance.id'))
   etat = Column(Boolean)
 
