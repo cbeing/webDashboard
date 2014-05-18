@@ -35,9 +35,10 @@ def studentProfile(id_num):
 
 @app.route('/p')
 def liste_presence():
+  presenceList = getPresenceList()
   classes = getClasseList()
   sessions = getSessionsList()
-  return render_template('absence.html', classes = classes, sessions = sessions)
+  return render_template('absence.html', classes = classes, sessions = sessions, presenceList = presenceList)
 
 @app.route('/p/add', methods=['GET', 'POST'])
 def generatePresenceList():
@@ -128,6 +129,9 @@ def getClasseList():
 
 def getTeachersList():
   return Enseignant.query.all()
+
+def getPresenceList():
+  return Presence.query.all()
 
 
 @app.route('/s')
