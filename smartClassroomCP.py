@@ -30,7 +30,7 @@ def listOfStudentsPerClass(class_id):
 @app.route('/st/<id_num>')
 def studentProfile(id_num):
   student = Etudiant.query.filter(Etudiant.numInscription == id_num)[0]
-  presenceList = Presence.query.filter(Presence.etudiant == student.id)
+  presenceList = Presence.query.filter(Presence.etudiant == student.numInscription)
   return render_template('studentProfile.html', student = student, presence = presenceList)
 
 @app.route('/p')
@@ -44,7 +44,7 @@ def generatePresenceList():
   seance = Seance.query.get(request.form['session'])
   students = Etudiant.query.filter(seance.classe == Etudiant.classe)
   for s in students:
-    p = Presence(seance, s.id)
+    p = Presence(seance, s.numInscription)
     db_session.add(p)
     db_session.commit()
 
