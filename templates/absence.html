@@ -13,17 +13,23 @@
             <th>#</th>
             <th>Nom</th>
             <th>Prénom</th>
-            <th>Email</th>
+            <th>Present</th>
+            <th>Heure Entrée</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {% for e in (c|getStudentsList) %}
+          {% for p in presenceList %}
             <tr>
-              <td>{{ e.numInscription }}</td>
-              <td>{{ e.nom }}</td>
-              <td>{{ e.prenom }}</td>
-              <td>{{ e.email }}</td>
+              <td>{{ p.etudiant }}</td>
+              <td>{{ (p.etudiant|getStudent).nom }}</td>
+              <td>{{ (p.etudiant|getStudent).prenom }}</td>
+              <td>{{ p.etat }}</td>
+              {% if p.etat == 1 %}
+              <td>{{ p.heure_entree }}</td>
+              {% else  %}
+              <td> --- </td>
+              {% endif  %}
               <td style="width:80px;">
                 <button data-toggle-dialog="#" data-toggle="modal" data-target="#updateslide" title="Update Slide" class="btn btn-small btn-warning" type="button"><i class="icon-white icon-edit"></i></button>
                 <button data-toggle-dialog="#" data-toggle="modal" data-target="#deleteslide" title="Update Slide" class="btn btn-small btn-danger" type="button"><i class="icon-white icon-trash"></i></button>
