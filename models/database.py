@@ -1,13 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.pool import NullPool
 import json
 
 fConfig = open('config.json', 'r')
 config = json.load(fConfig)
 fConfig.close()
 
-engine = create_engine('mysql://'+config['user']+':'+config['password']+'@'+config['host']+'/'+config['database_name']+'?unix_socket=/var/run/mysqld/mysqld.sock', convert_unicode=True)
+engine = create_engine('mysql://'+config['user']+':'+config['password']+'@'+config['host']+'/'+config['database_name']+'?unix_socket=/var/run/mysqld/mysqld.sock', convert_unicode=True, poolclass=NullPool)
 db_session = scoped_session(sessionmaker(autocommit=False, 
       autoflush=False,bind=engine))
 
